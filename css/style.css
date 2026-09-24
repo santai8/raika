@@ -139,10 +139,8 @@ main { width: min(1120px, 100%); margin: 0 auto; padding: 10px clamp(20px, 4vw, 
 .newsletter-invite { margin: 28px 0; padding: 24px; border: 1px solid rgba(167, 125, 49, .4); background: linear-gradient(135deg, #f7f0df, #fffaf0); }
 .newsletter-invite .eyebrow { margin-bottom: 6px; }
 .newsletter-invite h2 { margin: 0; font: 600 1.2rem/1.6 var(--serif); }
-.newsletter-invite > p:not(.eyebrow):not(.redirect-status) { margin: 8px 0 16px; color: #5f565b; }
+.newsletter-invite > p:not(.eyebrow) { margin: 8px 0 16px; color: #5f565b; }
 .newsletter-invite .primary-button { text-decoration: none; }
-.redirect-status { margin: 12px 0 0; color: var(--muted); font-size: .85rem; }
-.newsletter-invite .text-button { margin-top: 4px; text-decoration: underline; text-underline-offset: 3px; }
 .result-detail { display: grid; gap: 16px; margin: 32px 0; }
 .result-detail section { padding: 22px; border-left: 2px solid var(--gold-light); background: var(--paper); }
 .result-detail h2 { margin: 0 0 10px; font: 600 1.05rem var(--serif); }

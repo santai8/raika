@@ -2,7 +2,6 @@
 
 const TYPES = ["zukou", "fumikou", "osenkou"];
 const NEWSLETTER_URL = "https://www.reservestock.jp/subscribe/118446?prev=true";
-const REDIRECT_DELAY_MS = 10000;
 
 const questions = [
   {
@@ -121,14 +120,6 @@ const ui = {
 let currentQuestion = 0;
 let answers = Array(questions.length).fill(null);
 let currentResult = null;
-let newsletterRedirectTimer = null;
-
-function cancelNewsletterRedirect() {
-  if (newsletterRedirectTimer !== null) {
-    window.clearTimeout(newsletterRedirectTimer);
-    newsletterRedirectTimer = null;
-  }
-}
 
 function showScreen(name) {
   Object.entries(screens).forEach(([key, element]) => { element.hidden = key !== name; });
@@ -203,17 +194,11 @@ function showResult(type) {
   }));
   document.querySelector("#fire-note").hidden = type !== "osenkou";
   ui.shareStatus.textContent = "";
-  document.querySelector("#redirect-status").textContent = "10秒後に登録ページへ移動します。";
   document.querySelector("#newsletter-link").href = NEWSLETTER_URL;
   showScreen("result");
-  cancelNewsletterRedirect();
-  newsletterRedirectTimer = window.setTimeout(() => {
-    window.location.assign(NEWSLETTER_URL);
-  }, REDIRECT_DELAY_MS);
 }
 
 async function shareResult() {
-  cancelNewsletterRedirect();
   const result = results[currentResult];
   const shareData = {
     title: "あなたに合うお香診断",
@@ -236,7 +221,6 @@ async function shareResult() {
 }
 
 function restart() {
-  cancelNewsletterRedirect();
   answers = Array(questions.length).fill(null);
   currentQuestion = 0;
   currentResult = null;
@@ -255,11 +239,6 @@ ui.backButton.addEventListener("click", () => {
 });
 document.querySelector("#restart-button").addEventListener("click", restart);
 document.querySelector("#share-button").addEventListener("click", shareResult);
-document.querySelector("#stay-button").addEventListener("click", () => {
-  cancelNewsletterRedirect();
-  document.querySelector("#redirect-status").textContent = "このページにとどまり、診断結果を読み続けられます。";
-});
-document.querySelector("#newsletter-link").addEventListener("click", cancelNewsletterRedirect);
 
 // Node-based smoke tests can import the pure scoring function without changing the browser experience.
 if (typeof module !== "undefined" && module.exports) module.exports = { determineResult, questions };

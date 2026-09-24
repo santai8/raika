@@ -56,11 +56,7 @@ git push -u origin main
 
 ## GitHub Pagesで公開する方法
 
-1. GitHubで `santai8/raika` リポジトリを開く
-2. `Settings` → `Pages` を開く
-3. `Build and deployment` の `Source` を **Deploy from a branch** にする
-4. Branchを **main**、フォルダを **/(root)** にして `Save`
-5. 数分後、`https://santai8.github.io/raika/` で公開されます
+`main` ブランチへ変更を反映すると、GitHub Actionsが自動で公開します。進行状況はリポジトリの `Actions` タブで確認でき、公開先は `https://santai8.github.io/raika/` です。
 
 ## 表現について
 
